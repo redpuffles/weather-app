@@ -9,38 +9,39 @@ import React from "react";
 
 import "./App.css";
 import defaults from "./defaults.json";
+
+import CurrentConditions from "./components/CurrentConditions";
+import ForecastConditions from "./components/ForecastConditions";
+
 import api from "./util/WeatherAPI";
 
 function App () {
-  // const [forecastData, setForecastData] = React.useState([]);
-  const [location,] = React.useState(defaults.location);
-  // const [locationData, setLocationData] = React.useState({});
-  // const [todayData, setTodayData] = React.useState({});
-  // const [unit, setUnit] = React.useState(defaults.unit);
+  const [data, setData] = React.useState({});
+  const [location, setLocation] = React.useState(defaults.location);
+  const [units, setUnits] = React.useState(defaults.unit);
 
-  // On page load, initialise weather data in state variables.
   React.useEffect(() => {
-    fetchData();
-  }, [location]);
-
-  // Fetches weather data for the current location in `location` and stores it
-  // in the state variables.
-  async function fetchData () {
-    const response = await api.forecast(5, location);
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      console.log("ERROR FETCHING FORECAST DATA.");
+    async function fetchData () {
+      const response = await api.forecast(5, location);
+      const body = await response.json();
+  
+      if (response.status !== 200) {
+        console.log("ERROR FETCHING FORECAST DATA.");
+        return;
+      }
+  
+      setData(body);
+  
       return;
     }
 
-    console.log(body);
-    return;
-  }
+    fetchData();
+  }, [location]);
 
   return (
     <div className="App">
-      <p>Home Page!</p>
+      <CurrentConditions data={data} units={units} />
+      <ForecastConditions data={data} units={units} />
     </div>
   );
 }
