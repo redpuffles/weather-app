@@ -6,54 +6,45 @@
  * @since 1.0.0
  */
 
-import api_data from "../api_data.json";
+import api_keys from "../config/api_keys.json";
+import api_urls from "../config/api_urls.json";
 
 export class API {
-  constructor (url) {
-    this.url = url;
+  constructor (forecastURL, reverseGeoURL) {
+    this.forecastURL = forecastURL;
+    this.reverseGeoURL = reverseGeoURL;
   }
 
   /**
-   * Returns most recent weather data for the queried location.
+   * Returns weather data for the given location for the next 7 days.
    * 
-   * @param {string} query The city or location phrase to query.
+   * @param {string} lat The latitude of the location.
+   * @param {string} lon The longitude of the location.
    * 
    * @return {object} The response object, including response code and body.
    */
-  current (query) {
+  forecast (lat, lon) {
     const options = {
       method: "GET",
       headers: {
-        accept: "application/json",
-        "Content-Type": "application/json"
+        accept: "application/json"
       }
     }
 
-    return (fetch(`${this.url}/current.json?key=${api_data.key}&q=${query}&aqi=no`, options));
+    return (fetch(`${this.forecastURL}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${api_keys.openweather}`, options));
   }
 
-  /**
-   * Returns most recent weather data for the queried location, as well as data
-   * for the next n days.
-   * 
-   * @param {integer} days Number of days to get forecast data for (includes the
-   *                       current day).
-   * @param {string} query The city or location phrase to query.
-   * 
-   * @return {object} The response object, including response code and body.
-   */
-  forecast (days, query) {
+  reverseGeocode (lat, lon) {
     const options = {
       method: "GET",
       headers: {
-        accept: "application/json",
-        "Content-Type": "application/json"
+        accept: "application/json"
       }
     }
 
-    return (fetch(`${this.url}/forecast.json?key=${api_data.key}&q=${query}&days=${days}&aqi=no&alerts=no`, options));
+    return (fetch(`${this.reverseGeoURL}?latlng=${lat},${lon}&key=${api_keys.googlemaps}`, options));
   }
 }
 
-const api = new API(api_data.url);
+const api = new API(api_urls.forecast, api_urls.reverse_geocode);
 export default api;

@@ -26,7 +26,7 @@ function CurrentConditions (props) {
       const date = cur.getDate();
       const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(cur);
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const day = new Intl.DateTimeFormat("en-US", { day: "numeric" }).format(cur);
+      const day = cur.getDay();
       setDate(`${date} ${month} (${dayOfWeek[day]})`);
     } catch (e) {
       setDate("-");

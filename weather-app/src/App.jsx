@@ -1,29 +1,28 @@
-/*
-
-Last Updated: 1 July 2021, Roger.
-Created: 1 July 2021, Roger.
-
-*/
-
 import React from "react";
 
 import "./App.css";
-import defaults from "./defaults.json";
 
-import CurrentConditions from "./components/CurrentConditions";
-import ForecastConditions from "./components/ForecastConditions";
+// import CurrentConditions from "./components/CurrentConditions";
+// import ForecastConditions from "./components/ForecastConditions";
+import LocationSettings from "./components/LocationSettings";
+
+import defaults from "./config/defaults.json";
 
 import api from "./util/WeatherAPI";
 
 function App () {
   const [data, setData] = React.useState({});
-  const [location, setLocation] = React.useState(defaults.location);
+  const [lat, setLat] = React.useState(defaults.lat);
+  const [location, setLocation] = React.useState("");
+  const [lon, setLon] = React.useState(defaults.lon);
   const [units, setUnits] = React.useState(defaults.unit);
 
   React.useEffect(() => {
     async function fetchData () {
-      const response = await api.forecast(5, location);
+      const response = await api.forecast(lat, lon);
       const body = await response.json();
+
+      console.log(body);
   
       if (response.status !== 200) {
         console.log("ERROR FETCHING FORECAST DATA.");
@@ -36,12 +35,33 @@ function App () {
     }
 
     fetchData();
-  }, [location]);
+  }, [lat, lon]);
+
+  React.useEffect(() => {
+    async function fetchLocation() {
+      const response = await api.reverseGeocode(lat, lon);
+      const body = await response.json();
+
+      console.log(body);
+
+      if (response.status !== 200) {
+        console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
+        return;
+      }
+
+      return;
+    }
+
+    fetchLocation();
+  }, [lat, lon]);
 
   return (
     <div className="App">
-      <CurrentConditions data={data} units={units} />
-      <ForecastConditions data={data} units={units} />
+      location: {location}
+      <LocationSettings />
+      {/* <CurrentConditions data={data} units={units} />
+      <p>----------------</p>
+      <ForecastConditions data={data} units={units} /> */}
     </div>
   );
 }
