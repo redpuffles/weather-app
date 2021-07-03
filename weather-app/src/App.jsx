@@ -2,6 +2,7 @@ import React from "react";
 
 import "./App.css";
 
+import ChangeUnits from "./components/ChangeUnits";
 import CurrentConditions from "./components/CurrentConditions";
 import ForecastConditions from "./components/ForecastConditions";
 import LocationSettings from "./components/LocationSettings";
@@ -26,57 +27,66 @@ function App () {
     setCoords([ newLatitude, newLongitude ]);
   }
 
+  function handleUnitsC () {
+    setUnits("metric");
+  }
+
+  function handleUnitsF () {
+    setUnits("imperial");
+  }
+
   function openSettings () {
     setSettingsActive(true);
   }
 
-  // React.useEffect(() => {
-  //   async function fetchData () {
-  //     const response = await api.forecast(coords[0], coords[1], units);
-  //     const body = await response.json();
+  React.useEffect(() => {
+    async function fetchData () {
+      const response = await api.forecast(coords[0], coords[1], units);
+      const body = await response.json();
 
-  //     console.log(body);
+      console.log(body);
   
-  //     if (response.status !== 200) {
-  //       console.log("ERROR FETCHING FORECAST DATA.");
-  //       return;
-  //     }
+      if (response.status !== 200) {
+        console.log("ERROR FETCHING FORECAST DATA.");
+        return;
+      }
   
-  //     setData(body);
-  //   }
+      setData(body);
+    }
 
-  //   fetchData();
-  // }, [coords]);
+    fetchData();
+  }, [coords, units]);
 
-  // React.useEffect(() => {
-  //   async function fetchLocation() {
-  //     const response = await api.reverseGeocode(coords[0], coords[1]);
-  //     const body = await response.json();
+  React.useEffect(() => {
+    async function fetchLocation() {
+      const response = await api.reverseGeocode(coords[0], coords[1]);
+      const body = await response.json();
 
-  //     if (response.status !== 200) {
-  //       console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
-  //       return;
-  //     }
+      if (response.status !== 200) {
+        console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
+        return;
+      }
 
-  //     if (body.status !== "OK") {
-  //       console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
-  //       return;
-  //     }
+      if (body.status !== "OK") {
+        console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
+        return;
+      }
 
-  //     var loc = body.plus_code.compound_code.split(" ");
-  //     loc.shift();
+      var loc = body.plus_code.compound_code.split(" ");
+      loc.shift();
 
-  //     setLocation(loc.join(" "));
-  //   }
+      setLocation(loc.join(" "));
+    }
 
-  //   fetchLocation();
-  // }, [coords]);
+    fetchLocation();
+  }, [coords]);
 
   return (
     <div className="App">
       <SettingsButton openSettings={openSettings} />
       <LocationSettings closeSettings={closeSettings} handleCoords={handleCoords} location={location} settingsActive={settingsActive}/>
       <CurrentConditions data={data} location={location} units={units} />
+      <ChangeUnits handleUnitsC={handleUnitsC} handleUnitsF={handleUnitsF} units={units} />
       <p>----------------</p>
       <ForecastConditions data={data} units={units} />
     </div>
