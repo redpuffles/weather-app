@@ -3,8 +3,9 @@ import React from "react";
 import "./App.css";
 
 import CurrentConditions from "./components/CurrentConditions";
-// import ForecastConditions from "./components/ForecastConditions";
+import ForecastConditions from "./components/ForecastConditions";
 import LocationSettings from "./components/LocationSettings";
+import SettingsButton from "./components/SettingsButton";
 
 import defaults from "./config/defaults.json";
 
@@ -13,11 +14,20 @@ import api from "./util/WeatherAPI";
 function App () {
   const [data, setData] = React.useState({});
   const [coords, setCoords] = React.useState([ defaults.lat, defaults.lon ]);
-  const [location, setLocation] = React.useState("-");
+  const [location, setLocation] = React.useState(defaults.location);
+  const [settingsActive, setSettingsActive] = React.useState(false);
   const [units, setUnits] = React.useState(defaults.unit);
+
+  function closeSettings () {
+    setSettingsActive(false);
+  }
 
   function handleCoords (newLatitude, newLongitude) {
     setCoords([ newLatitude, newLongitude ]);
+  }
+
+  function openSettings () {
+    setSettingsActive(true);
   }
 
   // React.useEffect(() => {
@@ -64,10 +74,11 @@ function App () {
 
   return (
     <div className="App">
-      <LocationSettings handleCoords={handleCoords} location={location}/>
+      <SettingsButton openSettings={openSettings} />
+      <LocationSettings closeSettings={closeSettings} handleCoords={handleCoords} location={location} settingsActive={settingsActive}/>
       <CurrentConditions data={data} location={location} units={units} />
       <p>----------------</p>
-      {/* <ForecastConditions data={data} units={units} /> */}
+      <ForecastConditions data={data} units={units} />
     </div>
   );
 }

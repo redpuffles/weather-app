@@ -1,31 +1,72 @@
 import React from "react";
 
+import ForecastDay from "./ForecastDay";
+
 function ForecastConditions (props) {
   const [forecast, setForecast] = React.useState([]);
 
   React.useEffect(() => {
-    setForecast([]);
-  
-    try {
-      console.log(props.data.forecast.forecastday);
+    const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var forecastTemp = [];
 
-      for (var i = 0; i < props.data.forecast.forecastday.length; i++) {
-        const date = new Date(props.data.forecast.forecastday[i].date_epoch * 1000);
-        const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        const data = {
-          avgtemp_c: props.data.forecast.forecastday[i].day.avgtemp_c,
-          avgtemp_f: props.data.forecast.forecastday[i].day.avgtemp_f,
-          day: dayOfWeek[date.getDay()]
+    const now = new Date();
+    const nowDate = String(now.getDate()).padStart(2, "0");
+    const nowMonth = new Intl.DateTimeFormat("en-US", { month: "short" }).format(now);
+    const nowDay = dayOfWeek[now.getDay()];
+    
+    var dateDay;
+    var i;
+
+    try {
+      for (i = 0; i < 5; i++) {
+        const date = new Date(props.data.daily[i].dt * 1000);
+        const dateDate = String(date.getDate()).padStart(2, "0");
+        const dateMonth = new Intl.DateTimeFormat("en-US", { month: "short" }).format(date);
+        dateDay = dayOfWeek[date.getDay()];
+
+        if ((nowDate === dateDate) && (nowMonth === dateMonth) && (nowDay === dateDay)) {
+          dateDay = "Today";
         }
-        setForecast([...forecast, data]);
+
+        const data = {
+          day: dateDay,
+          icon: props.data.daily[i].weather[0].icon,
+          main: props.data.daily[i].weather[0].main,
+          temp: props.data.daily[i].temp.day
+        }
+
+        forecastTemp = [ ...forecastTemp, data ];
       }
+
+      setForecast(forecastTemp);
     } catch (e) {
-      setForecast([]);
+      var date = now;
+      dateDay = nowDay;
+
+      for (i = 0; i < 5; i++) {
+        const data = {
+          day: dateDay,
+          icon: "",
+          main: "",
+          temp: ""
+        }
+
+        forecastTemp = [ ...forecastTemp, data ];
+
+        date.setDate(date.getDate() + 1);
+        dateDay = dayOfWeek[date.getDay()];
+      }
+
+      setForecast(forecastTemp);
     }
   }, [props]);
 
   return (
-    <div>{JSON.stringify(forecast)}</div>
+    <div>
+      {forecast.map((item) =>
+        <ForecastDay day={item.day} icon={item.icon} key={item.day} main={item.main} temp={item.temp} />
+      )}
+    </div>
   );
 }
 

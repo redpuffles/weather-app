@@ -1,4 +1,5 @@
 {
   "forecast": "https://api.openweathermap.org/data/2.5/onecall",
-  "reverse_geocode": "https://maps.googleapis.com/maps/api/geocode/json"
+  "reverse_geocode": "https://maps.googleapis.com/maps/api/geocode/json",
+  "weather_icons": "http://openweathermap.org/img/wn"
 }

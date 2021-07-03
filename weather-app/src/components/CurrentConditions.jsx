@@ -1,10 +1,14 @@
 import React from "react";
 
+import api_urls from "../config/api_urls.json";
+import defaults from "../config/defaults.json";
+
 function CurrentConditions (props) {
   const [conditions, setConditions] = React.useState({});
   const [date, setDate] = React.useState("");
-  const [feels, setFeels] = React.useState("");
+  const [high, setHigh] = React.useState("");
   const [location, setLocation] = React.useState("");
+  const [low, setLow] = React.useState("");
   const [temp, setTemp] = React.useState("");
 
   React.useEffect(() => {
@@ -12,7 +16,7 @@ function CurrentConditions (props) {
       setConditions(props.data.current.weather[0]);
     } catch (e) {
       const cond = {
-        icon: "",
+        icon: "01d",
         main: "-"
       }
       setConditions(cond);
@@ -21,12 +25,14 @@ function CurrentConditions (props) {
 
   React.useEffect(() => {
     try {
-      const cur = new Date(props.data.current.dt * 1000);
-      const date = cur.getDate();
-      const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(cur);
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const day = cur.getDay();
-      setDate(`${date} ${month} (${dayOfWeek[day]})`);
+
+      const now = new Date();
+      const date = String(now.getDate()).padStart(2, "0");
+      const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(now);
+      const day = dayOfWeek[now.getDay()];
+
+      setDate(`${date} ${month} (${day})`);
     } catch (e) {
       setDate("-");
     };
@@ -34,9 +40,9 @@ function CurrentConditions (props) {
 
   React.useEffect(() => {
     try {
-      setFeels(props.data.current.feels_like);
+      setHigh(props.data.daily[0].temp.max);
     } catch (e) {
-      setFeels("-");
+      setHigh("-");
     }
   }, [props]);
 
@@ -44,8 +50,16 @@ function CurrentConditions (props) {
     try {
       setLocation(props.location);
     } catch (e) {
-      setLocation("-");
+      setLocation(defaults.location);
     };
+  }, [props]);
+
+  React.useEffect(() => {
+    try {
+      setLow(props.data.daily[0].temp.min);
+    } catch (e) {
+      setLow("-");
+    }
   }, [props]);
 
   React.useEffect(() => {
@@ -61,9 +75,9 @@ function CurrentConditions (props) {
       <p>{date}</p>
       <p>{location}</p>
       <p>{temp}°</p>
-      <p>{conditions.text}</p>
-      <img src={conditions.icon} />
-      <p>feels like: {feels}°</p>
+      <p>{conditions.main}</p>
+      <img alt={conditions.main} src={api_urls.weather_icons + "/" + conditions.icon + "@2x.png"} />
+      <p>low: {low}° high: {high}°</p>
     </div>
   );
 }
