@@ -30,8 +30,8 @@ function ForecastConditions (props) {
 
         const data = {
           day: dateDay,
+          description: props.data.daily[i].weather[0].description,
           icon: props.data.daily[i].weather[0].icon,
-          main: props.data.daily[i].weather[0].main,
           temp: props.data.daily[i].temp.day
         }
 
@@ -46,8 +46,8 @@ function ForecastConditions (props) {
       for (i = 0; i < 5; i++) {
         const data = {
           day: dateDay,
+          description: "",
           icon: "",
-          main: "",
           temp: ""
         }
 
@@ -64,7 +64,7 @@ function ForecastConditions (props) {
   return (
     <div>
       {forecast.map((item) =>
-        <ForecastDay day={item.day} icon={item.icon} key={item.day} main={item.main} temp={item.temp} />
+        <ForecastDay day={item.day} description={item.description} icon={item.icon} key={item.day} temp={item.temp} />
       )}
     </div>
   );

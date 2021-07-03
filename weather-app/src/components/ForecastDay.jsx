@@ -3,15 +3,15 @@ import React from "react";
 import api_urls from "../config/api_urls.json";
 
 function ForecastDay (props) {
+  const [description, setDescription] = React.useState("");
   const [icon, setIcon] = React.useState("");
-  const [main, setMain] = React.useState("");
   const [temp, setTemp] = React.useState("");
 
   React.useEffect(() => {
-    if (props.main === "") {
-      setMain("Unavailable");
+    if (props.description === "") {
+      setDescription("Unavailable");
     } else {
-      setMain(props.main);
+      setDescription(props.description);
     }
   }, [props]);
 
@@ -37,7 +37,7 @@ function ForecastDay (props) {
       <p>{temp}°</p>
       {icon === ""
         ? null
-        : <img alt={main} src={icon} />
+        : <img alt={description} src={icon} />
       }
     </div>
   );
