@@ -3,18 +3,17 @@ import React from "react";
 function CurrentConditions (props) {
   const [conditions, setConditions] = React.useState({});
   const [date, setDate] = React.useState("");
-  const [high, setHigh] = React.useState("");
+  const [feels, setFeels] = React.useState("");
   const [location, setLocation] = React.useState("");
-  const [low, setLow] = React.useState("");
   const [temp, setTemp] = React.useState("");
 
   React.useEffect(() => {
     try {
-      setConditions(props.data.current.condition);
+      setConditions(props.data.current.weather[0]);
     } catch (e) {
       const cond = {
         icon: "",
-        text: "-"
+        main: "-"
       }
       setConditions(cond);
     }
@@ -22,7 +21,7 @@ function CurrentConditions (props) {
 
   React.useEffect(() => {
     try {
-      const cur = new Date(props.data.location.localtime_epoch * 1000);
+      const cur = new Date(props.data.current.dt * 1000);
       const date = cur.getDate();
       const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(cur);
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -35,35 +34,23 @@ function CurrentConditions (props) {
 
   React.useEffect(() => {
     try {
-      if (props.units === "temp_c") { setHigh(props.data.forecast.forecastday[0].day.maxtemp_c) }
-      else if (props.units === "temp_f") { setHigh(props.data.forecast.forecastday[0].day.maxtemp_f) }
+      setFeels(props.data.current.feels_like);
     } catch (e) {
-      setHigh("-");
+      setFeels("-");
     }
   }, [props]);
 
   React.useEffect(() => {
     try {
-      setLocation(props.data.location.name + ", " + props.data.location.region);
+      setLocation(props.location);
     } catch (e) {
       setLocation("-");
     };
   }, [props]);
 
-
   React.useEffect(() => {
     try {
-      if (props.units === "temp_c") { setLow(props.data.forecast.forecastday[0].day.mintemp_c) }
-      else if (props.units === "temp_f") { setLow(props.data.forecast.forecastday[0].day.mintemp_f) }
-    } catch (e) {
-      setLow("-");
-    }
-  }, [props]);
-
-  React.useEffect(() => {
-    try {
-      if (props.units === "temp_c") { setTemp(props.data.current.temp_c) }
-      else if (props.units === "temp_f") { setTemp(props.data.current.temp_f) }
+      setTemp(props.data.current.temp);
     } catch (e) {
       setTemp("-");
     };
@@ -76,7 +63,7 @@ function CurrentConditions (props) {
       <p>{temp}°</p>
       <p>{conditions.text}</p>
       <img src={conditions.icon} />
-      <p>low: {low}° high: {high}°</p>
+      <p>feels like: {feels}°</p>
     </div>
   );
 }

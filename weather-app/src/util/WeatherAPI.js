@@ -18,12 +18,13 @@ export class API {
   /**
    * Returns weather data for the given location for the next 7 days.
    * 
-   * @param {string} lat The latitude of the location.
-   * @param {string} lon The longitude of the location.
+   * @param {string} lat   The latitude of the location.
+   * @param {string} lon   The longitude of the location.
+   * @param {string} units Units to receive temperature as (metric or imperial).
    * 
    * @return {object} The response object, including response code and body.
    */
-  forecast (lat, lon) {
+  forecast (lat, lon, units) {
     const options = {
       method: "GET",
       headers: {
@@ -31,7 +32,7 @@ export class API {
       }
     }
 
-    return (fetch(`${this.forecastURL}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${api_keys.openweather}`, options));
+    return (fetch(`${this.forecastURL}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=${units}&appid=${api_keys.openweather}`, options));
   }
 
   reverseGeocode (lat, lon) {

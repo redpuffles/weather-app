@@ -5,7 +5,6 @@ export const Modal = styled.div`
   display: ${props => props.active ? "block" : "none"};
   height: auto;
   left: 50%;
-  overflow-y: auto;
   padding: 10px;
   position: fixed;
   top: 50%;

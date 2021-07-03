@@ -2,7 +2,7 @@ import React from "react";
 
 import "./App.css";
 
-// import CurrentConditions from "./components/CurrentConditions";
+import CurrentConditions from "./components/CurrentConditions";
 // import ForecastConditions from "./components/ForecastConditions";
 import LocationSettings from "./components/LocationSettings";
 
@@ -12,56 +12,62 @@ import api from "./util/WeatherAPI";
 
 function App () {
   const [data, setData] = React.useState({});
-  const [lat, setLat] = React.useState(defaults.lat);
-  const [location, setLocation] = React.useState("");
-  const [lon, setLon] = React.useState(defaults.lon);
+  const [coords, setCoords] = React.useState([ defaults.lat, defaults.lon ]);
+  const [location, setLocation] = React.useState("-");
   const [units, setUnits] = React.useState(defaults.unit);
 
-  React.useEffect(() => {
-    async function fetchData () {
-      const response = await api.forecast(lat, lon);
-      const body = await response.json();
+  function handleCoords (newLatitude, newLongitude) {
+    setCoords([ newLatitude, newLongitude ]);
+  }
 
-      console.log(body);
+  // React.useEffect(() => {
+  //   async function fetchData () {
+  //     const response = await api.forecast(coords[0], coords[1], units);
+  //     const body = await response.json();
+
+  //     console.log(body);
   
-      if (response.status !== 200) {
-        console.log("ERROR FETCHING FORECAST DATA.");
-        return;
-      }
+  //     if (response.status !== 200) {
+  //       console.log("ERROR FETCHING FORECAST DATA.");
+  //       return;
+  //     }
   
-      setData(body);
-  
-      return;
-    }
+  //     setData(body);
+  //   }
 
-    fetchData();
-  }, [lat, lon]);
+  //   fetchData();
+  // }, [coords]);
 
-  React.useEffect(() => {
-    async function fetchLocation() {
-      const response = await api.reverseGeocode(lat, lon);
-      const body = await response.json();
+  // React.useEffect(() => {
+  //   async function fetchLocation() {
+  //     const response = await api.reverseGeocode(coords[0], coords[1]);
+  //     const body = await response.json();
 
-      console.log(body);
+  //     if (response.status !== 200) {
+  //       console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
+  //       return;
+  //     }
 
-      if (response.status !== 200) {
-        console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
-        return;
-      }
+  //     if (body.status !== "OK") {
+  //       console.log("ERROR FETCHING REVERSE GEOCODE DATA (COORDINATES -> LOCATION.");
+  //       return;
+  //     }
 
-      return;
-    }
+  //     var loc = body.plus_code.compound_code.split(" ");
+  //     loc.shift();
 
-    fetchLocation();
-  }, [lat, lon]);
+  //     setLocation(loc.join(" "));
+  //   }
+
+  //   fetchLocation();
+  // }, [coords]);
 
   return (
     <div className="App">
-      location: {location}
-      <LocationSettings />
-      {/* <CurrentConditions data={data} units={units} />
+      <LocationSettings handleCoords={handleCoords} location={location}/>
+      <CurrentConditions data={data} location={location} units={units} />
       <p>----------------</p>
-      <ForecastConditions data={data} units={units} /> */}
+      {/* <ForecastConditions data={data} units={units} /> */}
     </div>
   );
 }
