@@ -2,6 +2,8 @@ import React from "react";
 
 import ForecastDay from "./ForecastDay";
 
+import * as S from "../styles/ForecastConditions.styles";
+
 function ForecastConditions (props) {
   const [forecast, setForecast] = React.useState([]);
 
@@ -62,11 +64,11 @@ function ForecastConditions (props) {
   }, [props]);
 
   return (
-    <div>
+    <S.ForecastConditions>
       {forecast.map((item) =>
         <ForecastDay day={item.day} description={item.description} icon={item.icon} key={item.day} temp={item.temp} />
       )}
-    </div>
+    </S.ForecastConditions>
   );
 }
 

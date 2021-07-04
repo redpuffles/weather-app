@@ -2,6 +2,8 @@ import React from "react";
 
 import api_urls from "../config/api_urls.json";
 
+import * as S from "../styles/ForecastDay.styles";
+
 function ForecastDay (props) {
   const [description, setDescription] = React.useState("");
   const [icon, setIcon] = React.useState("");
@@ -27,19 +29,19 @@ function ForecastDay (props) {
     if (props.temp === "") {
       setTemp("-");
     } else {
-      setTemp(props.temp);
+      setTemp(Math.round(props.temp));
     }
   }, [props]);
 
   return (
-    <div>
-      <p>{props.day}</p>
-      <p>{temp}°</p>
+    <S.ForecastDay>
+      <S.Day>{props.day}</S.Day>
+      <S.Temp>{temp}°</S.Temp>
       {icon === ""
         ? null
-        : <img alt={description} src={icon} />
+        : <S.Img alt={description} src={icon} width="10px"/>
       }
-    </div>
+    </S.ForecastDay>
   );
 }
 
