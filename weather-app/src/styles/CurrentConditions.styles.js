@@ -16,7 +16,7 @@ export const Desc = styled.span`
   text-align: center;
 `;
 
-export const Img = styled.img`
+export const Icon = styled.img`
   // background-color: white;
 `;
 
@@ -42,7 +42,6 @@ export const Temp = styled.span`
   // }
 `;
 
-export const TempDeg = styled(Temp)`
-  display: inline-block;
-  width: 0;
+export const TempContainer = styled.div`
+  text-align: center;
 `;

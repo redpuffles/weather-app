@@ -1,71 +1,81 @@
+/**
+ * A component modal that represents the Location Settings page, allowing the
+ * user to change the application's forecasting location.
+ * 
+ * The user can automatically get their location, or can manually search one and
+ * use that. See UserGeolocation and LocationSearch respectively.
+ * 
+ * @file This file defines the LocationSettings component class.
+ * @author Roger.
+ * @since 1.2.3
+ */
+
+import PropTypes from "prop-types";
 import React from "react";
-import GooglePlacesAutoComplete, { geocodeByPlaceId } from "react-google-places-autocomplete";
 
-import { Modal, ModalBackground } from "../styles/Modal.styles";
+import { ErrorMessage, ModalBackground } from "../styles/Global.styles";
+import * as S from "../styles/LocationSettings.styles";
 
-import api_keys from "../config/api_keys.json";
+import LocationSearch from "./LocationSearch";
+import UserGeolocation from "./UserGeolocation";
 
 function LocationSettings (props) {
-  const [search, setSearch] = React.useState("");
-  const [status, setStatus] = React.useState("");
+  const [errorGeneral, setErrorGeneral] = React.useState(""); // An error shown if something goes wrong when retrieving current location.
+  const [location, setLocation] = React.useState(""); // Current location.
 
-  function getLocation () {
-    if (!navigator.geolocation) {
-      console.log("Geolocation not supported.");
-    } else {
-      navigator.geolocation.getCurrentPosition(getLocationSuccess, getLocationError);
+
+  /**
+   * Retrieves and stores props.location in location.
+   */
+  React.useEffect(() => {
+    try {
+      setErrorGeneral("");
+      setLocation(props.location);
+    } catch (e) {
+      setErrorGeneral("Couldn't fetch location information from the server.");
+      setLocation("Location Undefined.");
     }
-  }
-
-  function getLocationError () {
-    setStatus("Unable to retrieve your location. Try manually searching for it below.");
-  }
-
-  function getLocationSuccess (position) {
-    const gotLatitude = position.coords.latitude;
-    const gotLongitude = position.coords.longitude;
-
-    props.handleCoords(gotLatitude, gotLongitude);
-  }
-
-  function submitSearch () {
-    geocodeByPlaceId(search.value.place_id)
-      .then(results => {
-        props.handleCoords(String(results[0].geometry.location.lat()), String(results[0].geometry.location.lng()));
-      })
-      .catch(error => console.log("ERROR: RETRIEVING GEOCODE."));
-  }
+  }, [props.location]);
 
   return (
     <ModalBackground active={props.settingsActive}>
-      <Modal active={props.settingsActive}>
-        <button onClick={props.closeSettings} type="button">x</button>
-        <h2>Location Settings</h2>
-        <p>Current Location: {props.location}</p>
-        <div>
-          <h4>Choose A New Location</h4>
-          <div>
-            <button onClick={getLocation} type="button">➤</button>
-          </div>
-          <p>{status}</p>
-          <div>
-            <GooglePlacesAutoComplete
-              apiKey={api_keys.googleplaces}
-              autocompletionRequest={{
-                types: [ "(regions)" ]
-              }}
-              debounce="1000"
-              selectProps={{
-                search,
-                onChange: setSearch
-              }}
-            />
-            <button onClick={submitSearch} type="button">Use this</button>
-          </div>
-        </div>
-      </Modal>
+      <S.LocationSettings active={props.settingsActive}>
+        <S.CloseButton onClick={props.closeSettings}>
+          <i className="fas fa-times"></i>
+        </S.CloseButton>
+        <S.Header>
+          <i className="fas fa-map-marker-alt"></i>
+          <h3>Location Settings</h3>
+        </S.Header>
+        <S.CurrentLocation>
+          <p>
+            <b>Current Location:</b> {location}
+          </p>
+          <ErrorMessage>{errorGeneral}</ErrorMessage>
+        </S.CurrentLocation>
+        <S.OptionsContainer>
+          <UserGeolocation
+            closeSettings={props.closeSettings}
+            handleCoords={props.handleCoords}
+          />
+          <S.OptionsSeparator>
+            <span>OR</span>
+          </S.OptionsSeparator>
+          <LocationSearch
+            closeSettings={props.closeSettings}
+            handleCoords={props.handleCoords}
+          />
+        </S.OptionsContainer>
+      </S.LocationSettings>
     </ModalBackground>
   );
+}
+
+LocationSettings.propTypes = {
+  closeSettings: PropTypes.func,
+  handleCoords: PropTypes.func,
+  location: PropTypes.string,
+  settingsActive: PropTypes.bool
 }
 
 export default LocationSettings;

@@ -15,13 +15,13 @@ export const ForecastDay = styled.div`
   justify-content: center;
 `;
 
-export const Img = styled.img`
+export const Icon = styled.img`
   max-height: 100px;
   max-width: 100px;
   width: 50%;
 `;
 
 export const Temp = styled.span`
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: 600;
 `;

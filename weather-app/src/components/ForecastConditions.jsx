@@ -1,3 +1,16 @@
+/**
+ * A component that contains and handles ForecastDay components for the next
+ * five days (including the current day).
+ * 
+ * Processes relevant weatherData data from props and passes them down to each
+ * children day component.
+ * 
+ * @file This file defines the ForecastConditions component class.
+ * @author Roger.
+ * @since 1.0.3
+ */
+
+import PropTypes from "prop-types";
 import React from "react";
 
 import ForecastDay from "./ForecastDay";
@@ -5,71 +18,76 @@ import ForecastDay from "./ForecastDay";
 import * as S from "../styles/ForecastConditions.styles";
 
 function ForecastConditions (props) {
-  const [forecast, setForecast] = React.useState([]);
+  const [forecastData, setForecastData] = React.useState([]); // An array to hold each forecast day's data. Should be length five, ordered by day.
 
+  /**
+   * Processes props.weatherData and holds the relevant parts for each
+   * ForecastDay component.
+   * 
+   * Gets relevant data for the first five days. If an error occurs, a message
+   * is displayed on the home page.
+   */
   React.useEffect(() => {
-    const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var forecastTemp = [];
-
-    const now = new Date();
-    const nowDate = String(now.getDate()).padStart(2, "0");
-    const nowMonth = new Intl.DateTimeFormat("en-US", { month: "short" }).format(now);
-    const nowDay = dayOfWeek[now.getDay()];
-    
-    var dateDay;
-    var i;
+    var forecastDataNew = [];
+    var i = 0;
 
     try {
       for (i = 0; i < 5; i++) {
-        const date = new Date(props.data.daily[i].dt * 1000);
-        const dateDate = String(date.getDate()).padStart(2, "0");
-        const dateMonth = new Intl.DateTimeFormat("en-US", { month: "short" }).format(date);
-        dateDay = dayOfWeek[date.getDay()];
-
-        if ((nowDate === dateDate) && (nowMonth === dateMonth) && (nowDay === dateDay)) {
-          dateDay = "Today";
-        }
+        const date = new Date(props.weatherData.daily[i].dt * 1000);
 
         const data = {
-          day: dateDay,
-          description: props.data.daily[i].weather[0].description,
-          icon: props.data.daily[i].weather[0].icon,
-          temp: props.data.daily[i].temp.day
+          alt: props.weatherData.daily[i].weather[0].description,
+          day: props.dayFromNum(date.getDay()),
+          icon: props.weatherData.daily[i].weather[0].icon,
+          temp: String(props.weatherData.daily[i].temp.day)
         }
 
-        forecastTemp = [ ...forecastTemp, data ];
+        forecastDataNew = [ ...forecastDataNew, data ];
       }
-
-      setForecast(forecastTemp);
     } catch (e) {
-      var date = now;
-      dateDay = nowDay;
+      props.handleHomeError("Couldn't fetch daily forecast data from the servers.");
+
+      var date = new Date();
 
       for (i = 0; i < 5; i++) {
         const data = {
-          day: dateDay,
-          description: "",
+          alt: "",
+          day: props.dayFromNum(date.getDay()),
           icon: "",
           temp: ""
         }
 
-        forecastTemp = [ ...forecastTemp, data ];
+        forecastDataNew = [ ...forecastDataNew, data ];
 
         date.setDate(date.getDate() + 1);
-        dateDay = dayOfWeek[date.getDay()];
       }
-
-      setForecast(forecastTemp);
+    } finally {
+      setForecastData(forecastDataNew);
     }
-  }, [props]);
+
+  }, [props.weatherData])
 
   return (
     <S.ForecastConditions>
-      {forecast.map((item) =>
-        <ForecastDay day={item.day} description={item.description} icon={item.icon} key={item.day} temp={item.temp} />
+      {forecastData.map((i) =>
+        <ForecastDay
+          alt={i.alt}
+          day={i.day}
+          getIconURL={props.getIconURL}
+          icon={i.icon}
+          key={i.day}
+          temp={i.temp}
+        />
       )}
     </S.ForecastConditions>
   );
+}
+
+ForecastConditions.propTypes = {
+  dayFromNum: PropTypes.func,
+  getIconURL: PropTypes.func,
+  handleHomeError: PropTypes.func,
+  weatherData: PropTypes.object
 }
 
 export default ForecastConditions;

@@ -1,24 +1,21 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const App = styled.div `
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(124,124,203,1) 0%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(180deg, rgba(10,16,46,1) 0%, rgba(11,19,65,1) 50%, rgba(66,66,66,1) 100%);
+  color: white;
   height: 100vh;
   margin: auto;
   // min-height: 360px;
   // min-width: 360px;
   width: 100vw;
 
-  ${props => props.night && css `
-    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(39,39,78,1) 63%, rgba(0,212,255,1) 100%);
-  `};
-
   // @media (min-height: 1921px) {
   //   height: 1920px;
   // }
 
-  // @media (min-width: 1201px) {
-  //   width: 1200px;
-  // }
+  @media (min-width: 1201px) {
+    width: 1200px;
+  }
 `;
 
 export const Date = styled.span`

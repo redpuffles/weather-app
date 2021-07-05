@@ -13,10 +13,10 @@ export const ChangeUnits = styled.div`
 
 export const UnitOption = styled.span`
   border-radius: 2px;
-  color: ${props => props.active ? "black" : "grey"};
+  color: ${props => props.active ? "white" : "grey"};
   font-weight: ${props => props.active ? 700 : 400};
   // opacity: ${props => props.active ? 1.0 : 0.8};
-  padding: 5px;
+  padding: 5px 8px;
 
   ${props => !props.active && css `
     &:hover {

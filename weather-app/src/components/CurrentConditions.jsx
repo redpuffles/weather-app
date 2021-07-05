@@ -1,71 +1,58 @@
-import React from "react";
+/**
+ * A component that shows data reflecting current weather conditions.
+ * 
+ * Shows:
+ *  - Current temperature.
+ *  - Weather conditions as a simple phrase, e.g. "Clear".
+ *  - An icon reflecting current weather conditions.
+ *  - The low and high temperature of the day.
+ * 
+ * @file This file defines the CurrentConditions component class.
+ * @author Roger.
+ * @since 1.1.4
+ */
 
-import api_urls from "../config/api_urls.json";
-import defaults from "../config/defaults.json";
+import PropTypes from "prop-types";
+import React from "react";
 
 import * as S from "../styles/CurrentConditions.styles";
 
 function CurrentConditions (props) {
-  const [conditions, setConditions] = React.useState({});
-  const [high, setHigh] = React.useState("");
-  const [low, setLow] = React.useState("");
-  const [temp, setTemp] = React.useState("");
+  const [desc, setDesc] = React.useState(""); // Weather conditions as a simple phrase, e.g. "Clear".
+  const [high, setHigh] = React.useState(""); // High temperature of the day.
+  const [iconURL, setIconURL] = React.useState(""); // An icon URL reflecting current weather conditions.
+  const [low, setLow] = React.useState(""); // Low temperature of the day.
+  const [temp, setTemp] = React.useState(""); // Current temperature.
 
-  // conditions: icon and main text
+  /**
+   * Stores relevant data from props.weatherData for display.
+   */
   React.useEffect(() => {
     try {
-      setConditions(props.data.current.weather[0]);
+      setDesc(props.weatherData.current.weather[0].main);
+      setHigh(Math.round(props.weatherData.daily[0].temp.max));
+      setIconURL(props.getIconURL(props.weatherData.current.weather[0].icon));
+      setLow(Math.round(props.weatherData.daily[0].temp.min));
+      setTemp(Math.round(props.weatherData.current.temp));
     } catch (e) {
-      const cond = {
-        icon: "01d",
-        main: "Weather Undefined"
-      }
-
-      setConditions(cond);
-      props.setError("4. Couldn't fetch weather conditions from the servers.");
-    }
-  }, [props]);
-
-  // high: text
-  React.useEffect(() => {
-    try {
-      setHigh(Math.round(props.data.daily[0].temp.max));
-    } catch (e) {
+      props.handleHomeError("Couldn't fetch current weather data from the servers.");
+      setDesc("-");
       setHigh("-");
-      props.setError("5. Couldn't fetch max temperature from the servers.");
-    }
-  }, [props]);
-
-  // low: text
-  React.useEffect(() => {
-    try {
-      setLow(Math.round(props.data.daily[0].temp.min));
-    } catch (e) {
+      setIconURL("");
       setLow("-");
-      props.setError("6. Couldn't fetch minimum temperature from the servers.");
-    }
-  }, [props]);
-
-  // temp: text
-  React.useEffect(() => {
-    try {
-      setTemp(Math.round(props.data.current.temp));
-    } catch (e) {
       setTemp("-");
-      props.setError("7. Couldn't fetch current temperature from the servers.");
-    };
-  }, [props]);
+    }
+  }, [props.weatherData]);
 
   return (
     <S.CurrentConditions>
-      <div>
-        <S.Temp>{temp}</S.Temp>
-        <S.TempDeg>°</S.TempDeg>
-        <S.Desc>{conditions.main}</S.Desc>
-      </div>
-      <S.Img
-        alt={conditions.main}
-        src={api_urls.weather_icons + "/" + conditions.icon + "@2x.png"}
+      <S.TempContainer>
+        <S.Temp>{temp}°</S.Temp>
+        <S.Desc>{desc}</S.Desc>
+      </S.TempContainer>
+      <S.Icon
+        alt={desc}
+        src={iconURL}
       />
       <S.LowHighContainer>
         <S.LowHigh>Low: {low}°</S.LowHigh>
@@ -73,6 +60,12 @@ function CurrentConditions (props) {
       </S.LowHighContainer>
     </S.CurrentConditions>
   );
+}
+
+CurrentConditions.propTypes = {
+  getIconURL: PropTypes.func,
+  handleHomeError: PropTypes.func,
+  weatherData: PropTypes.object
 }
 
 export default CurrentConditions;
