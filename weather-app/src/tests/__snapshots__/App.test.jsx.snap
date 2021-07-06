@@ -204,7 +204,7 @@ exports[`renders snapshot 1`] = `
               </div>
             </div>
             <button
-              className="sc-fKgJPI hKptgn"
+              className="sc-fKgJPI fNqKwa"
               onClick={[Function]}
             >
               Update Location

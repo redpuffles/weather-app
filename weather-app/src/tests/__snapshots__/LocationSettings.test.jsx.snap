@@ -198,7 +198,7 @@ exports[`renders properly given the minimal required props 1`] = `
             </div>
           </div>
           <button
-            className="sc-kEqXSa hviVyj"
+            className="sc-kEqXSa kQTJti"
             onClick={[Function]}
           >
             Update Location
