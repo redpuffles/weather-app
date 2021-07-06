@@ -9,4 +9,5 @@ made in react.
 
 ## installing + running
 run `yarn install` first to set up react etc.
+<br/>
 run `yarn start` to start the server up.
