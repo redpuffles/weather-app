@@ -6,3 +6,7 @@ project for a HTML-based weather application.
 - can swap between celsius or fahrenheit.
 
 made in react.
+
+## installing + running
+run `yarn install` first to set up react etc.
+run `yarn start` to start the server up.
