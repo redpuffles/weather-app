@@ -28,6 +28,7 @@ function ForecastDay (props) {
     } else {
       setAlt("Alt text unavailable.");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.alt]);
 
   /**
@@ -47,6 +48,7 @@ function ForecastDay (props) {
     } else {
       setIconURL("");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.icon]);
 
   /**
@@ -58,6 +60,7 @@ function ForecastDay (props) {
     } else {
       setTemp("-");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.temp]);
 
   return (

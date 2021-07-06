@@ -1,3 +1,11 @@
+/**
+ * Styled components for the SettingsButton component.
+ * 
+ * @file This file defines the SettingsButton styled-components.
+ * @author Roger.
+ * @since 1.0.2
+ */
+
 import styled from "styled-components";
 
 export const SettingsButton = styled.span`

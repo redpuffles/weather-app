@@ -1,9 +1,14 @@
+/**
+ * Styled components for the LocationSettings component.
+ * 
+ * @file This file defines the LocationSettings styled-components.
+ * @author Roger.
+ * @since 1.1.2
+ */
+
 import styled from "styled-components";
 
-// import GooglePlacesAutoComplete from "react-google-places-autocomplete";
-
 export const CloseButton = styled.span`
-  // background-color: red;
   border-radius: 2px;
   left: calc(100% - 4px);
   padding: 4px 8px;
@@ -20,9 +25,10 @@ export const CloseButton = styled.span`
 
 export const CurrentLocation = styled.div`
   margin: 10px 0;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
+
+  @media (orientation: landscape) and (max-height: 639px) {
+    font-size: 0.9em;
+  }
 `;
 
 export const ErrorMessage = styled.p`
@@ -51,6 +57,10 @@ export const Header = styled.div`
   i {
     display: inline-block;
   }
+
+  @media (orientation: landscape) and (max-height: 639px) {
+    font-size: 0.8em;
+  }
 `;
 
 export const LocationSettings = styled.div`
@@ -74,14 +84,19 @@ export const LocationSettings = styled.div`
   @media (min-width: 1201px) {
     width: calc(960px - 40px);
   }
+
+  @media (orientation: landscape) and (max-height: 639px) {
+    max-height: 250px;
+    padding: 20px 20px 30px;
+  }
 `;
 
 export const OptionsContainer = styled.div`
-  // align-items: center;
-  // border: 1px solid green;
-  // display: flex;
-  // flex-direction: column;
   margin: 60px 0 0;
+
+  @media (orientation: landscape) and (max-height: 639px) {
+    margin: 20px 0 0;
+  }
 `;
 
 export const OptionsSeparator = styled.p`
@@ -96,12 +111,10 @@ export const OptionsSeparator = styled.p`
     background: white;
     padding: 0 10px;
   }
-`;
 
-export const Section = styled.div`
-  margin-top: 10px;
-
-  & + & {
-    margin-top: 30px;
+  @media (orientation: landscape) and (max-height: 639px) {
+    span {
+      font-size: 0.8em;
+    }
   }
 `;

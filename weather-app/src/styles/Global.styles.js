@@ -1,9 +1,22 @@
+/**
+ * Styled components for all globally used components.
+ * 
+ * @file This file defines all globally used styled-components.
+ * @author Roger.
+ * @since 1.0.3
+ */
+
 import styled from "styled-components";
 
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 0.8em;
   margin: 5px 0;
+  text-align: center;
+
+  @media (orientation: landscape) and (max-height: 640px) {
+    font-size: 0.6em;
+  }
 `;
 
 export const ModalBackground = styled.div`

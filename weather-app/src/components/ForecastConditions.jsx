@@ -65,6 +65,7 @@ function ForecastConditions (props) {
       setForecastData(forecastDataNew);
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.weatherData])
 
   return (

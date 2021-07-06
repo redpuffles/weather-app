@@ -1,3 +1,11 @@
+/**
+ * Styled components for the UserGeolocation component.
+ * 
+ * @file This file defines the UserGeolocation styled-components.
+ * @author Roger.
+ * @since 1.0.0
+ */
+
 import styled from "styled-components";
 
 export const LocateButton = styled.span`
@@ -22,5 +30,9 @@ export const LocateButton = styled.span`
 export const UserGeolocation = styled.div`
   p {
     text-align: center;
+  }
+
+  @media (orientation: landscape) and (max-height: 639px) {
+    font-size: 0.9em;
   }
 `;

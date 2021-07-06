@@ -42,6 +42,7 @@ function CurrentConditions (props) {
       setLow("-");
       setTemp("-");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.weatherData]);
 
   return (

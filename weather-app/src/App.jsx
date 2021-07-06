@@ -239,6 +239,7 @@ function App () {
 
     fetchWeatherData();
     fetchLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coords]);
 
   /**
@@ -256,6 +257,7 @@ function App () {
     if (coords.length !== 2) return;
     localStorage.setItem("units", units);
     fetchWeatherData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [units]);
 
   /**
