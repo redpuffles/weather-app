@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly given the minimal required props 1`] = `
+<div
+  aria-label=""
+  className="sc-gtsrHT kapWDu"
+  role="forecast-day"
+>
+  <span
+    className="sc-bdnxRM iFkTIe"
+    data-testid="day"
+  >
+    
+  </span>
+  <span
+    className="sc-hKFxyN hDxXs"
+    data-testid="temp"
+  >
+    
+    °
+  </span>
+</div>
+`;

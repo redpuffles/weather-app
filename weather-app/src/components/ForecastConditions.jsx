@@ -39,6 +39,7 @@ function ForecastConditions (props) {
           alt: props.weatherData.daily[i].weather[0].description,
           day: props.dayFromNum(date.getDay()),
           icon: props.weatherData.daily[i].weather[0].icon,
+          key: i,
           temp: String(props.weatherData.daily[i].temp.day)
         }
 
@@ -54,6 +55,7 @@ function ForecastConditions (props) {
           alt: "",
           day: props.dayFromNum(date.getDay()),
           icon: "",
+          key: i,
           temp: ""
         }
 
@@ -76,7 +78,7 @@ function ForecastConditions (props) {
           day={i.day}
           getIconURL={props.getIconURL}
           icon={i.icon}
-          key={i.day}
+          key={i.key}
           temp={i.temp}
         />
       )}
@@ -85,9 +87,9 @@ function ForecastConditions (props) {
 }
 
 ForecastConditions.propTypes = {
-  dayFromNum: PropTypes.func,
-  getIconURL: PropTypes.func,
-  handleHomeError: PropTypes.func,
+  dayFromNum: PropTypes.func.isRequired,
+  getIconURL: PropTypes.func.isRequired,
+  handleHomeError: PropTypes.func.isRequired,
   weatherData: PropTypes.object
 }
 

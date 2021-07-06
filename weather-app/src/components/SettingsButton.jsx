@@ -15,14 +15,14 @@ import * as S from "../styles/SettingsButton.styles";
 
 function SettingsButton (props) {
   return (
-    <S.SettingsButton onClick={props.openSettings}>
-      <i className="fas fa-cog"></i>
+    <S.SettingsButton data-testid="submit" onClick={props.openSettings}>
+      <i className="fas fa-cog" data-testid="icon"></i>
     </S.SettingsButton>
   );
 }
 
 SettingsButton.propTypes = {
-  openSettings: PropTypes.func
+  openSettings: PropTypes.func.isRequired
 }
 
 export default SettingsButton;

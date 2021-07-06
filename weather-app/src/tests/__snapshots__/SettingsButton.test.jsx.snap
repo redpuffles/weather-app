@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly given the minimal required props 1`] = `
+<span
+  className="sc-bdnxRM dYeIiE"
+  data-testid="submit"
+  onClick={[Function]}
+>
+  <i
+    className="fas fa-cog"
+    data-testid="icon"
+  />
+</span>
+`;

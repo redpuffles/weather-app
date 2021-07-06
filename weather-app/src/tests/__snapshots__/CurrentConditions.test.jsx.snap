@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly given the minimal required props 1`] = `
+<div
+  className="sc-bdnxRM fQBYem"
+>
+  <div
+    className="sc-gKAaRy dTdeio"
+  >
+    <span
+      className="sc-jSFjdj jvKqai"
+      data-testid="temp"
+    >
+      
+      °
+    </span>
+    <span
+      className="sc-gtsrHT gTDrBs"
+      data-testid="desc"
+    >
+      
+    </span>
+  </div>
+  <img
+    alt=""
+    className="sc-dlnjwi dMvEmJ"
+    data-testid="icon"
+    src=""
+  />
+  <span
+    className="sc-eCApnc iTqvTI"
+  >
+    <div
+      className="sc-hKFxyN eBddjT"
+      data-testid="low"
+    >
+      Low: 
+      
+      °
+    </div>
+    <div
+      className="sc-hKFxyN eBddjT"
+      data-testid="high"
+    >
+      High: 
+      
+      °
+    </div>
+  </span>
+</div>
+`;

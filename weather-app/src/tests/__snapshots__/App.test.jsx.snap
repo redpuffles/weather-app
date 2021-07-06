@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot 1`] = `
+<div
+  className="sc-iJCRrE jHWIrr"
+>
+  <div
+    className="sc-hBMUJo eKLOIR"
+  />
+  <div
+    className="sc-ksluID cGYBsW"
+  >
+    <div
+      className="sc-dIvrsQ iZzizl"
+    >
+      <span
+        className="sc-fnVZcZ feHILT"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+      <div
+        className="sc-iemWCZ eaChfC"
+      >
+        <i
+          className="fas fa-map-marker-alt"
+        />
+        <h3>
+          Location Settings
+        </h3>
+      </div>
+      <div
+        className="sc-fFSPTT kUfNIO"
+      >
+        <p
+          data-testid="location"
+        >
+          <b>
+            Current Location:
+          </b>
+           
+          
+        </p>
+        <p
+          className="sc-bqGGPW kbMbNO"
+          data-testid="error-general"
+        >
+          
+        </p>
+      </div>
+      <div
+        className="sc-hHEiqL uMgA-D"
+      >
+        <div
+          className="sc-cxNHIi dkvkZD"
+        >
+          <p
+            data-testid="location-show"
+          >
+            <span
+              className="sc-iwajpm iJCsiV"
+              data-testid="button"
+              onClick={[Function]}
+            >
+              <i
+                className="fas fa-location-arrow"
+                data-testid="button-icon"
+              />
+            </span>
+            Use your own location.
+          </p>
+          <p
+            className="sc-bqGGPW kbMbNO"
+            data-testid="error-locate"
+          >
+            
+          </p>
+        </div>
+        <p
+          className="sc-dlMDgC iGFtqC"
+        >
+          <span>
+            OR
+          </span>
+        </p>
+        <div
+          className="sc-kfYoZR ctkaNq"
+        >
+          <h4>
+            Search For Your Location
+          </h4>
+          <p
+            className="sc-bqGGPW kbMbNO"
+            data-testid="error-search"
+          >
+            
+          </p>
+          <div
+            className="sc-bCwfaz jLYQox"
+          >
+            <div
+              className=" css-1akvy1b-container"
+              onKeyDown={[Function]}
+            >
+              <div
+                className=" css-14hwr22-control"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <div
+                  className=" css-g1d714-ValueContainer"
+                >
+                  <div
+                    className=" css-1wa3eu0-placeholder"
+                  >
+                    Search and select...
+                  </div>
+                  <div
+                    className="css-b8ldur-Input"
+                  >
+                    <div
+                      className=""
+                      style={
+                        Object {
+                          "display": "inline-block",
+                        }
+                      }
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autoCapitalize="none"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        disabled={false}
+                        id="react-select-2-input"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        spellCheck="false"
+                        style={
+                          Object {
+                            "background": 0,
+                            "border": 0,
+                            "boxSizing": "content-box",
+                            "color": "inherit",
+                            "fontSize": "inherit",
+                            "label": "input",
+                            "opacity": 1,
+                            "outline": 0,
+                            "padding": 0,
+                            "width": "1px",
+                          }
+                        }
+                        tabIndex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style={
+                          Object {
+                            "height": 0,
+                            "left": 0,
+                            "overflow": "scroll",
+                            "position": "absolute",
+                            "top": 0,
+                            "visibility": "hidden",
+                            "whiteSpace": "pre",
+                          }
+                        }
+                      >
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <span
+                    className=" css-1okebmr-indicatorSeparator"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className=" css-tlfecz-indicatorContainer"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="css-tj5bde-Svg"
+                      focusable="false"
+                      height={20}
+                      viewBox="0 0 20 20"
+                      width={20}
+                    >
+                      <path
+                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              className="sc-fKgJPI hKptgn"
+              onClick={[Function]}
+            >
+              Update Location
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-ezzafa jEabKy"
+  >
+    <span
+      className="sc-lmgQwP kXcwlf"
+      data-testid="submit"
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-cog"
+        data-testid="icon"
+      />
+    </span>
+    <span
+      className="sc-giAqHp hNLqsX"
+    >
+      
+    </span>
+    <p
+      className="sc-bqGGPW kbMbNO"
+    >
+      
+    </p>
+    <span
+      className="sc-bYwzuL hQXkDC"
+    >
+      
+    </span>
+    <div
+      className="sc-hKFxyN fBnEVn"
+    >
+      <div
+        className="sc-pNWdM jgGxEH"
+      >
+        <span
+          className="sc-fujyAs eGHyjn"
+          data-testid="temp"
+        >
+          
+          °
+        </span>
+        <span
+          className="sc-eCApnc gejuCA"
+          data-testid="desc"
+        >
+          
+        </span>
+      </div>
+      <img
+        alt=""
+        className="sc-jSFjdj gOflmA"
+        data-testid="icon"
+        src=""
+      />
+      <span
+        className="sc-iCoGMd MmyjZ"
+      >
+        <div
+          className="sc-gKAaRy jpRoyC"
+          data-testid="low"
+        >
+          Low: 
+          
+          °
+        </div>
+        <div
+          className="sc-gKAaRy jpRoyC"
+          data-testid="high"
+        >
+          High: 
+          
+          °
+        </div>
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM hinOPy"
+    >
+      <div>
+        <span
+          className="sc-gtsrHT fvNXM"
+          data-testid="celsius"
+        >
+          °C
+        </span>
+        <span
+          className="sc-dlnjwi eLQjyw"
+        >
+          |
+        </span>
+        <span
+          className="sc-gtsrHT eGapYP"
+          data-testid="fahrenheit"
+          onClick={[Function]}
+        >
+          °F
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dIsUp cFxHi"
+    />
+  </div>
+</div>
+`;

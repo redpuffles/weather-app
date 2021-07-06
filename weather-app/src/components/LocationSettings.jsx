@@ -23,7 +23,6 @@ function LocationSettings (props) {
   const [errorGeneral, setErrorGeneral] = React.useState(""); // An error shown if something goes wrong when retrieving current location.
   const [location, setLocation] = React.useState(""); // Current location.
 
-
   /**
    * Retrieves and stores props.location in location.
    */
@@ -48,10 +47,10 @@ function LocationSettings (props) {
           <h3>Location Settings</h3>
         </S.Header>
         <S.CurrentLocation>
-          <p>
+          <p data-testid="location">
             <b>Current Location:</b> {location}
           </p>
-          <ErrorMessage>{errorGeneral}</ErrorMessage>
+          <ErrorMessage data-testid="error-general">{errorGeneral}</ErrorMessage>
         </S.CurrentLocation>
         <S.OptionsContainer>
           <UserGeolocation
@@ -72,10 +71,10 @@ function LocationSettings (props) {
 }
 
 LocationSettings.propTypes = {
-  closeSettings: PropTypes.func,
-  handleCoords: PropTypes.func,
+  closeSettings: PropTypes.func.isRequired,
+  handleCoords: PropTypes.func.isRequired,
   location: PropTypes.string,
-  settingsActive: PropTypes.bool
+  settingsActive: PropTypes.bool.isRequired
 }
 
 export default LocationSettings;

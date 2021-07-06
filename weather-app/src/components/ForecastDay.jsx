@@ -23,8 +23,8 @@ function ForecastDay (props) {
    * Stores and updates alt from props.
    */
   React.useEffect(() => {
-    if (props.desc !== "") {
-      setAlt(props.desc);
+    if (props.alt !== "") {
+      setAlt(props.alt);
     } else {
       setAlt("Alt text unavailable.");
     }
@@ -64,11 +64,11 @@ function ForecastDay (props) {
   }, [props.temp]);
 
   return (
-    <S.ForecastDay>
-      <S.Day>{day}</S.Day>
-      <S.Temp>{temp}°</S.Temp>
+    <S.ForecastDay aria-label={day} role="forecast-day">
+      <S.Day data-testid="day">{day}</S.Day>
+      <S.Temp data-testid="temp">{temp}°</S.Temp>
       {iconURL !== ""
-        ? <S.Icon alt={alt} src={iconURL}/>
+        ? <S.Icon alt={alt} data-testid="icon" src={iconURL}/>
         : null
       }
     </S.ForecastDay>
@@ -76,11 +76,11 @@ function ForecastDay (props) {
 }
 
 ForecastDay.propTypes = {
-  alt: PropTypes.string,
+  alt: PropTypes.string.isRequired,
   day: PropTypes.string.isRequired,
-  getIconURL: PropTypes.func,
-  icon: PropTypes.string,
-  temp: PropTypes.string
+  getIconURL: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
+  temp: PropTypes.string.isRequired
 }
 
 export default ForecastDay;

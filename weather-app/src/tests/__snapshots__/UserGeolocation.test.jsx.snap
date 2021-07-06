@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly given the minimal required props 1`] = `
+<div
+  className="sc-eCApnc bbDsBc"
+>
+  <p
+    data-testid="location-show"
+  >
+    <span
+      className="sc-hKFxyN egSdOD"
+      data-testid="button"
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-location-arrow"
+        data-testid="button-icon"
+      />
+    </span>
+    Use your own location.
+  </p>
+  <p
+    className="sc-bdnxRM feElEx"
+    data-testid="error-locate"
+  >
+    
+  </p>
+</div>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly with the minimal required props 1`] = `
+<div
+  className="sc-eCApnc kEfoWn"
+/>
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders properly given the minimal required props 1`] = `
+<div
+  className="sc-bdnxRM hinOPy"
+>
+  <div>
+    <span
+      className="sc-gtsrHT fvNXM"
+      data-testid="celsius"
+    >
+      °C
+    </span>
+    <span
+      className="sc-dlnjwi eLQjyw"
+    >
+      |
+    </span>
+    <span
+      className="sc-gtsrHT eGapYP"
+      data-testid="fahrenheit"
+      onClick={[Function]}
+    >
+      °F
+    </span>
+  </div>
+</div>
+`;

@@ -60,20 +60,20 @@ function UserGeolocation (props) {
 
   return (
     <S.UserGeolocation>
-      <p>
-        <S.LocateButton onClick={locateUser}>
-          <i className="fas fa-location-arrow"></i>
+      <p data-testid="location-show">
+        <S.LocateButton data-testid="button" onClick={locateUser}>
+          <i className="fas fa-location-arrow" data-testid="button-icon"></i>
         </S.LocateButton>
         Use your own location.
       </p>
-      <ErrorMessage>{errorLocate}</ErrorMessage>
+      <ErrorMessage data-testid="error-locate">{errorLocate}</ErrorMessage>
     </S.UserGeolocation>
   );
 }
 
 UserGeolocation.propTypes = {
-  closeSettings: PropTypes.func,
-  handleCoords: PropTypes.func
+  closeSettings: PropTypes.func.isRequired,
+  handleCoords: PropTypes.func.isRequired
 }
 
 export default UserGeolocation;

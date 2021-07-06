@@ -54,7 +54,7 @@ function LocationSearch (props) {
   return (
     <S.LocationSearch>
       <h4>Search For Your Location</h4>
-      <ErrorMessage>{errorSearch}</ErrorMessage>
+      <ErrorMessage data-testid="error-search">{errorSearch}</ErrorMessage>
       <S.SearchContainer>
         <GooglePlacesAutoComplete
           apiKey={api_keys.googleplaces}
@@ -83,15 +83,19 @@ function LocationSearch (props) {
             value: search
           }}
         />
-        <S.SearchButton onClick={submitSearch}>Update Location</S.SearchButton>
+        <S.SearchButton
+          onClick={submitSearch}
+        >
+          Update Location
+        </S.SearchButton>
       </S.SearchContainer>
     </S.LocationSearch>
   );
 }
 
 LocationSearch.propTypes = {
-  closeSettings: PropTypes.func,
-  handleCoords: PropTypes.func
+  closeSettings: PropTypes.func.isRequired,
+  handleCoords: PropTypes.func.isRequired
 }
 
 export default LocationSearch;

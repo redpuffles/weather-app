@@ -48,24 +48,25 @@ function CurrentConditions (props) {
   return (
     <S.CurrentConditions>
       <S.TempContainer>
-        <S.Temp>{temp}°</S.Temp>
-        <S.Desc>{desc}</S.Desc>
+        <S.Temp data-testid="temp">{temp}°</S.Temp>
+        <S.Desc data-testid="desc">{desc}</S.Desc>
       </S.TempContainer>
       <S.Icon
         alt={desc}
+        data-testid="icon"
         src={iconURL}
       />
       <S.LowHighContainer>
-        <S.LowHigh>Low: {low}°</S.LowHigh>
-        <S.LowHigh>High: {high}°</S.LowHigh>
+        <S.LowHigh data-testid="low">Low: {low}°</S.LowHigh>
+        <S.LowHigh data-testid="high">High: {high}°</S.LowHigh>
       </S.LowHighContainer>
     </S.CurrentConditions>
   );
 }
 
 CurrentConditions.propTypes = {
-  getIconURL: PropTypes.func,
-  handleHomeError: PropTypes.func,
+  getIconURL: PropTypes.func.isRequired,
+  handleHomeError: PropTypes.func.isRequired,
   weatherData: PropTypes.object
 }
 

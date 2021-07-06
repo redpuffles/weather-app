@@ -17,36 +17,44 @@ import * as S from "../styles/ChangeUnits.styles";
 function ChangeUnits (props) {
   return (
     <S.ChangeUnits>
-      {props.units === "metric"
+      {props.units === "imperial"
         ? <div>
-            <S.UnitOption active={true}>°C</S.UnitOption>
-            <S.UnitOptionDivide>|</S.UnitOptionDivide>
             <S.UnitOption
               active={false}
-              onClick={props.handleUnitsF}
-            >
-              °F
-            </S.UnitOption>
-          </div>
-        : <div>
-            <S.UnitOption
-              active={false}
+              data-testid="celsius"
               onClick={props.handleUnitsC}
             >
               °C
             </S.UnitOption>
             <S.UnitOptionDivide>|</S.UnitOptionDivide>
-            <S.UnitOption active={true}>°F</S.UnitOption>
+            <S.UnitOption
+              active={true}
+              data-testid="fahrenheit"
+            >°F</S.UnitOption>
           </div>
+        : <div>
+          <S.UnitOption
+            active={true}
+            data-testid="celsius"
+          >°C</S.UnitOption>
+          <S.UnitOptionDivide>|</S.UnitOptionDivide>
+          <S.UnitOption
+            active={false}
+            data-testid="fahrenheit"
+            onClick={props.handleUnitsF}
+          >
+            °F
+          </S.UnitOption>
+        </div>
       }
     </S.ChangeUnits>
   );
 }
 
 ChangeUnits.propTypes = {
-  handleUnitsC: PropTypes.func,
-  handleUnitsF: PropTypes.func,
-  units: PropTypes.string
+  handleUnitsC: PropTypes.func.isRequired,
+  handleUnitsF: PropTypes.func.isRequired,
+  units: PropTypes.string.isRequired
 }
 
 export default ChangeUnits;
