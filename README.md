@@ -5,9 +5,15 @@ project for a HTML-based weather application.
 - can auto-detect location, or manually select.
 - can swap between celsius or fahrenheit.
 
-made in react.
+made in react. first time dealing with unit tests, they're pretty simple.
 
-## installing + running
-run `yarn install` first to set up react etc.
-<br/>
-run `yarn start` to start the server up.
+## Installation
+Run `yarn install` to set up react and dependencies.
+
+## Running the server
+Run `yarn start` to start the server. Default runs on port 3000, if this is taken, change the port by modifying "scripts.start" in package.json:
+</br>
+"start": "react-scripts start" -> "start": "PORT=PORT_NO react-scripts start"\
+
+## Unit tests
+Run `yarn test`.
