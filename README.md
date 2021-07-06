@@ -13,7 +13,7 @@ Run `yarn install` to set up react and dependencies.
 ## Running the server
 Run `yarn start` to start the server. Default runs on port 3000, if this is taken, change the port by modifying "scripts.start" in package.json:
 </br>
-"start": "react-scripts start" -> "start": "PORT=PORT_NO react-scripts start"\
+"start": "react-scripts start" -> "start": "PORT=PORT_NO react-scripts start"
 
 ## Unit tests
 Run `yarn test`.
