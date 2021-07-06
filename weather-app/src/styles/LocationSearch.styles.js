@@ -31,7 +31,7 @@ export const SearchButton = styled.button`
   border: 1px solid rgb(12,122,138);
   border-radius: 0 5px 5px 0;
   font-weight: 600;
-  padding: 3px 0;
+  padding: 3px 5px;
 
   &:hover {
     background-color: rgb(20,160,180);
